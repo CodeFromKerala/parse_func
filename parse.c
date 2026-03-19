@@ -19,24 +19,31 @@ n = 0, gives polynomial function, f(x) = ax^3 + bx^2 + cx^1 + d
 
 */
 
-double parse(parsed func_parsed, double x){
+double polynomial(int* func, double x){
+  double val = 0;
+  for (int i = 1; i < 4; i++){
+    val += func[i] * pow(x, i);
+  }
+  return val;
+}
+
+double parse(func func_parsed, double x){
   double e = exp(1);
   if (func_parsed.arr[0] == 0){
-    double stmt = 0;
-    for (int i = 1; i < 4; i++){
-      stmt += func_parsed.arr[i]*pow(x, i);
-    }
-    return stmt;
+    polynomial(func_parsed.arr);
+  // Algebraic Functions
   }else if (func_parsed.arr[0] == 1){
     if (func_parsed.arr[2] == 0){
       return func_parsed.arr[1] * pow(e, x);
     }
     return func_parsed.arr[1] * pow(func_parsed.arr[2], x);
+  // Exponential Functions
   }else if (func_parsed.arr[0] == 2){
     if (func_parsed.arr[2] == 0){
       return func_parsed.arr[1] * log(x)/log(e);
     }
     return func_parsed.arr[1] * log(x)/log(func_parsed.arr[2]);
+  // Logarithmic Functions
   }
   return e;
 }
