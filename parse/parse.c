@@ -1,4 +1,5 @@
 #include "parsefunc.h"
+#include "mathobj.h"
 #include <math.h>
 /*
 PARSE FUNC v1
@@ -19,7 +20,7 @@ n = 0, gives polynomial function, f(x) = ax^3 + bx^2 + cx^1 + d
 
 */
 
-double polynomial(int* func, double x){
+double polynomial(double* func, double x){
   double val = 0;
   for (int i = 1; i < 4; i++){
     val += func[i] * pow(x, i);
@@ -27,23 +28,31 @@ double polynomial(int* func, double x){
   return val;
 }
 
-double parse(func func_parsed, double x){
-  double e = exp(1);
-  if (func_parsed.arr[0] == 0){
-    polynomial(func_parsed.arr);
+double exponential(double* func, double x){
+  if (func[2] == 0){
+    return func[1] * pow(mathObj.e, x);
+  }
+  return func[1] * pow(func[2], x);
+}
+
+double logarithmic(double* func, double x){
+    if (func[2] == 0){
+      return func[1] * log(x)/log(mathObj.e);
+    }
+    return func[1] * log(x)/log(func[2]);
+}
+
+double parse(func function, double x){
+  if (function.type == 0){
+    return polynomial(function.params, x);
   // Algebraic Functions
-  }else if (func_parsed.arr[0] == 1){
-    if (func_parsed.arr[2] == 0){
-      return func_parsed.arr[1] * pow(e, x);
-    }
-    return func_parsed.arr[1] * pow(func_parsed.arr[2], x);
+  }else if (function.type == 1){
+    return exponential(function.params, x);
   // Exponential Functions
-  }else if (func_parsed.arr[0] == 2){
-    if (func_parsed.arr[2] == 0){
-      return func_parsed.arr[1] * log(x)/log(e);
-    }
-    return func_parsed.arr[1] * log(x)/log(func_parsed.arr[2]);
+  }else if (function.type == 2){
+    return logarithmic(function.params, x);
   // Logarithmic Functions
   }
-  return e;
+  return mathObj.e;
 }
+

@@ -1,6 +1,5 @@
 #ifndef PARSEFUNC_H
 #define PARSEFUNC_H
-
 /*
 PARSE FUNC v1
 To map a function to an integer set, some conventions have to be named
@@ -19,10 +18,9 @@ n = 0, gives polynomial function, f(x) = ax^3 + bx^2 + cx^1 + d
 
 
 */
-
-typedef double (*func)(double);
 typedef struct {
-  int arr[5];
+  int type;
+  double params[10];
 } func;
 double parse(func function, double x);
 

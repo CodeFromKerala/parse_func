@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -std=c99 -O2
-LIB = libparsefunc.a
-SRCS = parse.c
+LIB = libparsefunc.a libmathobj.a
+SRCS = ./parse/parse.c ./mathobj/mathobj.c
 OBJS = $(SRCS:.c=.o)
 
 .PHONY: all clean install uninstall
@@ -20,10 +20,11 @@ clean:
 
 install: $(LIB)
 	sudo mkdir -p /usr/local/include /usr/local/lib
-	sudo cp parsefunc.h /usr/local/include/
+	sudo cp ./parse/parsefunc.h /usr/local/include/
+	sudo cp ./mathobj/mathobj.h /usr/local/include/
 	sudo cp $(LIB) /usr/local/lib/
 	sudo ldconfig
 
 uninstall:
-	sudo rm -f /usr/local/include/parsefunc.h /usr/local/lib/$(LIB)
+	sudo rm -f /usr/local/include/parsefunc.h /usr/local/include/mathobj.h /usr/local/lib/$(LIB)
 	sudo ldconfig
