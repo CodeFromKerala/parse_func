@@ -20,9 +20,10 @@ n = 0, gives polynomial function, f(x) = ax^3 + bx^2 + cx^1 + d
 
 */
 
+
 double polynomial(double* func, double x){
-  double val = 0;
-  for (int i = 1; i < 4; i++){
+  double val = func[0];
+  for (int i = 1; i < sizeof(func); i++){
     val += func[i] * pow(x, i);
   }
   return val;

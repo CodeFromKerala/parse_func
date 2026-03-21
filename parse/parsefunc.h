@@ -23,5 +23,4 @@ typedef struct {
   double params[10];
 } func;
 double parse(func function, double x);
-
 #endif
