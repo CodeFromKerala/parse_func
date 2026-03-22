@@ -21,39 +21,17 @@ n = 0, gives polynomial function, f(x) = ax^3 + bx^2 + cx^1 + d
 */
 
 
-double polynomial(double* func, double x){
-  double val = func[0];
-  for (int i = 1; i < sizeof(func); i++){
-    val += func[i] * pow(x, i);
+double polynomial(func function, double x){
+  double val = function.params[0];
+  for (int i = 1; i < function.buffer; i++){
+    val += function.params[i] * pow(x, i);
   }
   return val;
 }
 
-double exponential(double* func, double x){
-  if (func[2] == 0){
-    return func[1] * pow(mathObj.e, x);
-  }
-  return func[1] * pow(func[2], x);
-}
-
-double logarithmic(double* func, double x){
-    if (func[2] == 0){
-      return func[1] * log(x)/log(mathObj.e);
-    }
-    return func[1] * log(x)/log(func[2]);
-}
-
 double parse(func function, double x){
   if (function.type == 0){
-    return polynomial(function.params, x);
-  // Algebraic Functions
-  }else if (function.type == 1){
-    return exponential(function.params, x);
-  // Exponential Functions
-  }else if (function.type == 2){
-    return logarithmic(function.params, x);
-  // Logarithmic Functions
-  }
+    return polynomial(function, x);
+  }  // Algebraic Functions
   return mathObj.e;
 }
-

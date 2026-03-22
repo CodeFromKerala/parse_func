@@ -21,6 +21,7 @@ n = 0, gives polynomial function, f(x) = ax^3 + bx^2 + cx^1 + d
 typedef struct {
   int type;
   double params[4];
+  int buffer;
 } func;
 double parse(func function, double x);
 #endif
