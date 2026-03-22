@@ -3,9 +3,14 @@ C library to map integer sets to functions and define basic mathematical constan
 
 # INSTALL
 ```
+cd
+git clone https://github.com/CodeFromKerala/parse_func
+cd parse_func
 sudo make install
 make clean
 ```
+
+or just install SimplyCalc @ [SimplyCalc](https://github.com/CodeFromKerala/SimplyCalc)
 
 # UNINSTALL
 
